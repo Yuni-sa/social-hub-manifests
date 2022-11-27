@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chat-backend
+      app: golang-chat
   template:
     metadata:
       labels:
-        app: chat-backend
+        app: golang-chat
     spec:
       containers:
       - name: backend
@@ -29,7 +29,7 @@ metadata:
   name: golang-chat-service
 spec:
   selector:
-    app: chat-backend
+    app: golang-chat
   ports:
   - port: 8000
     targetPort: 8000

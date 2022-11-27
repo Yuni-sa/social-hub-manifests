@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: react-chat-deployment
+  name: react-frontend-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: chat-frontend
+      app: react-frontend
   template:
     metadata:
       labels:
-        app: chat-frontend
+        app: react-frontend
     spec:
       containers:
-      - name: frontend
-        image: yuni2/react-chat:latest
+      - name: react-frontend
+        image: yuni2/react-frontend:latest
         imagePullPolicy: Always
         resources:
           limits:
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: react-chat-service
+  name: react-frontend-service
 spec:
   selector:
-    app: chat-frontend
+    app: react-frontend
   ports:
   - port: 3000
     targetPort: 3000

@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-deployment
+  name: golang-auth-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: golang-auth
   template:
     metadata:
       labels:
-        app: auth
+        app: golang-auth
     spec:
       containers:
-      - name: auth
+      - name: golang-auth
         image: yuni2/golang-auth:latest
         imagePullPolicy: Always
         resources:
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service
+  name: golang-auth-service
 spec:
   selector:
-    app: auth
+    app: golang-auth
   ports:
   - port: 4000
     targetPort: 4000
