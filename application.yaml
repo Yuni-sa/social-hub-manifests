@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: socialhub-argo-application
+  namespace: argocd
+spec:
+  project: default
+
+  destination:
+    namespace: socialhub
+    server: https://kubernetes.default.svc
+  source:
+    path: dev
+    repoURL: "${GITHUB_URL} + ${GITHUB_REPOSITORY}"
+    targetRevision: HEAD
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true

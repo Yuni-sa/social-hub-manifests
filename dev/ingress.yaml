@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  nginx.ingress.kubernetes.io/use-regex: "true"
+  name: socialhub-ingress
+spec:
+  rules:
+    - host: ${SOCIALHUB_URL}
+      http:
+        paths:
+          - path: /taki/*
+            pathType: Prefix
+            backend:
+              serviceName: taki-service
+              servicePort: 8080
+          - path: /socket.io/*
+            pathType: Prefix
+            backend:
+              serviceName: taki-service
+              servicePort: 8080
+          - path: /websocket
+            pathType: Prefix
+            backend:
+              serviceName: golang-chat-service
+              servicePort: 8000
+          - path: /api/*
+            pathType: Prefix
+            backend:
+              serviceName: auth-service
+              servicePort: 4000
+          - path: /
+            pathType: Prefix
+            backend:
+              serviceName: react-chat-service
+              servicePort: 3000
+
